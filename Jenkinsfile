@@ -3,6 +3,7 @@ pipeline {
     tools {
         maven 'Maven'
         jdk 'jdk'
+        sonarQube 'sonarQube' 
     }
     stages {
         stage('Clean') {
@@ -27,9 +28,8 @@ pipeline {
         }
         stage('SonarQube analysis') {
             steps {
-                script {
-                    def scannerHome = tool 'SonarQube Scanner'
-                    withSonarQubeEnv('sonarQube') {
+                script { def scannerHome = tool 'sonarQube'
+                    withSonarQubeEnv('sonarQube') { 
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
