@@ -20,6 +20,7 @@ public class Main1 {
         }catch (Exception e){
             System.out.println(e);
             System.out.println("webooksssssssssssssssss");
+            System.out.println("SALAMALEKOUMMMMMMMMMMMMMMMMMMMMM");
         }
     }
 }
