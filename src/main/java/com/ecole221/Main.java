@@ -16,6 +16,7 @@ public class Main {
             rs.close();
         } catch (Exception e) {
             System.out.println(e);
+            System.out.println("breukhhhhhh");
         }
     }
 }
