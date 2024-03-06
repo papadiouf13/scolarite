@@ -11,8 +11,8 @@ public class Main1 {
             System.out.println("Saisir le libelle de la filiére");
             String libelle = sc.nextLine();
             FiliereService filiereService = new FiliereService();
-            if (filiereService.findFiliereByLibelle(libelle)) {
-                filiereService.addFiliere(libelle);
+            if (!filiereService.findFiliereByLibelle(libelle)) {
+                System.out.println(filiereService.addFiliere(libelle));
             }
             else {
                 System.out.println("Cette filiere existe dejà");

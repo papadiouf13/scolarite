@@ -28,10 +28,25 @@ public class DBHelper {
 
     private void myPreparedQuery(String sql) throws SQLException {
         try {
-            pstmt = cnx.prepareStatement(sql);
+            if (sql.toUpperCase().trim().startsWith("INSERT") ) {
+                pstmt = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            }else {
+                pstmt = cnx.prepareStatement(sql);
+            }
         } catch (SQLException e) {
             throw new SQLException(e);
         }
+    }
+
+    public int getGeneratedKeys() throws SQLException {
+        ResultSet rs = pstmt.getGeneratedKeys();
+
+        if (rs.next()){
+            int id = rs.getInt(1);
+            rs.close();
+            return id;
+        }
+        return -1;
     }
 
     public ResultSet executeSelect(String sql, Object[] parameters) throws SQLException {
@@ -41,7 +56,7 @@ public class DBHelper {
             myPreparedQuery(sql);
             if (parameters != null) {
                 for(int i = 0; i < parameters.length; i++) {
-                    pstmt.setObject((i+1), parameters[0]);
+                    pstmt.setObject((i+1), parameters[i]);
                 }
             }
             return pstmt.executeQuery();

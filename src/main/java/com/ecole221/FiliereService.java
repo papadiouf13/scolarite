@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class FiliereService {
-    public Boolean findFiliereByLibelle(String libelle) throws SQLException {
+    public Boolean  findFiliereByLibelle(String libelle) throws SQLException {
         try {
             DBHelper db =  DBHelper.getInstance();
             String sql = "select * from filiere where libelle = ?";
@@ -21,12 +21,13 @@ public class FiliereService {
         }
     }
 
-    public void addFiliere(String libelle) throws SQLException {
+    public int addFiliere(String libelle) throws SQLException {
         try {
             DBHelper db =  DBHelper.getInstance();
             String sql = "INSERT into filiere VALUES (null , ?)";
             Object[] tab = {libelle};
             db.executeMaj(sql, tab);
+            return db.getGeneratedKeys();
         } catch (SQLException e) {
             throw e;
         }
